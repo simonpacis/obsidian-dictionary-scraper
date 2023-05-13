@@ -20,5 +20,10 @@
 		"obsidian": "latest",
 		"tslib": "2.4.0",
 		"typescript": "4.7.4"
+	},
+	"dependencies": {
+		"artoo-js": "^0.4.4",
+		"cheerio": "^1.0.0-rc.12",
+		"node-fetch": "^3.3.1"
 	}
 }

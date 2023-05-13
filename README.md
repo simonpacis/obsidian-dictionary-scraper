@@ -1,4 +1,16 @@
-# Obsidian Sample Plugin
+# Obsidian Perseus Dictionary
+
+Choose between Elementary Lewis and Lewis and Short dictionaries from [Perseus](http://www.perseus.tufts.edu/hopper/).
+
+# Installation
+
+## Via BRAT
+
+- Install BRAT from Community Plugins in Obsidian
+- Open Command Palette and run the command "BRAT: Add a beta plugin for testing"
+- Use the following link: https://github.com/simonpacis/obsidian-perseus-dictionary 
+- Click "Add Plugin"
+- Go to Community Plugins, refresh, and enable Angry Reviewer
 
 This is a sample plugin for Obsidian (https://obsidian.md).
 
@@ -18,12 +30,15 @@ This sample plugin demonstrates some of the basic functionality the plugin API c
 
 Quick starting guide for new plugin devs:
 
-- Check if [someone already developed a plugin for what you want](https://obsidian.md/plugins)! There might be an existing plugin similar enough that you can partner up with.
+- Check if [someone already developed a plugin for what you want](https://obsidian.md/plugins)!
+There might be an existing plugin similar enough that you can partner up with.
 - Make a copy of this repo as a template with the "Use this template" button (login to GitHub if you don't see it).
-- Clone your repo to a local development folder. For convenience, you can place this folder in your `.obsidian/plugins/your-plugin-name` folder.
+- Clone your repo to a local development folder.
+For convenience, you can place this folder in your `.obsidian/plugins/your-plugin-name` folder.
 - Install NodeJS, then run `npm i` in the command line under your repo folder.
 - Run `npm run dev` to compile your plugin from `main.ts` to `main.js`.
-- Make changes to `main.ts` (or create new `.ts` files). Those changes should be automatically compiled into `main.js`.
+- Make changes to `main.ts` (or create new `.ts` files).
+Those changes should be automatically compiled into `main.js`.
 - Reload Obsidian to load the new version of your plugin.
 - Enable plugin in settings window.
 - For updates to the Obsidian API run `npm update` in the command line under your repo folder.
@@ -32,8 +47,11 @@ Quick starting guide for new plugin devs:
 
 - Update your `manifest.json` with your new version number, such as `1.0.1`, and the minimum Obsidian version required for your latest release.
 - Update your `versions.json` file with `"new-plugin-version": "minimum-obsidian-version"` so older versions of Obsidian can download an older version of your plugin that's compatible.
-- Create new GitHub release using your new version number as the "Tag version". Use the exact version number, don't include a prefix `v`. See here for an example: https://github.com/obsidianmd/obsidian-sample-plugin/releases
-- Upload the files `manifest.json`, `main.js`, `styles.css` as binary attachments. Note: The manifest.json file must be in two places, first the root path of your repository and also in the release.
+- Create new GitHub release using your new version number as the "Tag version".
+Use the exact version number, don't include a prefix `v`.
+See here for an example: https://github.com/obsidianmd/obsidian-sample-plugin/releases
+- Upload the files `manifest.json`, `main.js`, `styles.css` as binary attachments.
+Note: The manifest.json file must be in two places, first the root path of your repository and also in the release.
 - Publish the release.
 
 > You can simplify the version bump process by running `npm version patch`, `npm version minor` or `npm version major` after updating `minAppVersion` manually in `manifest.json`.
@@ -57,7 +75,9 @@ Quick starting guide for new plugin devs:
 - Copy over `main.js`, `styles.css`, `manifest.json` to your vault `VaultFolder/.obsidian/plugins/your-plugin-id/`.
 
 ## Improve code quality with eslint (optional)
-- [ESLint](https://eslint.org/) is a tool that analyzes your code to quickly find problems. You can run ESLint against your plugin to find common bugs and ways to improve your code. 
+- [ESLint](https://eslint.org/) is a tool that analyzes your code to quickly find problems.
+You can run ESLint against your plugin to find common bugs and ways to improve your code.
+
 - To use eslint with this project, make sure to install eslint from terminal:
   - `npm install -g eslint`
 - To use eslint to analyze this project use this command:

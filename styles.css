@@ -6,3 +6,29 @@ available in the app when your plugin is enabled.
 If your plugin does not need CSS, delete this file.
 
 */
+
+.perseus-view > select
+{
+	border: 1px solid rgba(0,0,0,0.1);
+	width:100%;
+	margin-bottom:10px;
+}
+
+.perseus-view > input[type=text] 
+{
+	width:100%;
+	margin-bottom:10px;
+}
+
+.perseus-view > button 
+{
+	width:100%;
+	margin-bottom:10px;
+}
+
+.perseus-view > h6
+{
+	width:100%;
+	text-align:center;
+	margin-bottom:10px;
+}
