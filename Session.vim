@@ -564,11 +564,11 @@ setlocal wrap
 setlocal wrapmargin=0
 silent! normal! zE
 let &fdl = &fdl
-let s:l = 80 - ((79 * winheight(0) + 28) / 57)
+let s:l = 14 - ((13 * winheight(0) + 28) / 57)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
-keepjumps 80
+keepjumps 14
 normal! 0
 wincmd w
 2wincmd w
