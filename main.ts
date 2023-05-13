@@ -1,7 +1,5 @@
 import { App, Editor, MarkdownView, Modal, Notice, Plugin, PluginSettingTab, Setting } from 'obsidian';
 import { DictionaryView } from "./view";
-var artoo = require('artoo-js'),
-	cheerio = require('cheerio');
 
 // Remember to rename these classes and interfaces!
 
@@ -18,6 +16,13 @@ export default class MyPlugin extends Plugin {
 
 	async onload() {
 		await this.loadSettings();
+
+		this.registerObsidianProtocolHandler("obsidian-perseus", async (e) => { //obsidian://obsidian-perseus
+			document.querySelector(".perseus-view").scrollTo(0,0);
+			var view = this.app.workspace.getLeavesOfType('perseus-view')[0].view;
+			view.getLatinLexiconEntry(e.id);
+		});
+
 		this.registerView("perseus-view", l => new DictionaryView(l));
 		this.addCommand({
 			id: `open-${name}`,
@@ -36,6 +41,15 @@ export default class MyPlugin extends Plugin {
 
 	async saveSettings() {
 		await this.saveData(this.settings);
+	}
+
+	private async getView(name: string): Promise<DictionaryView>
+	{
+		let leaf: WorkspaceLeaf;
+		if (!this.app.workspace.getLeavesOfType(name).length)
+			await this.app.workspace.getRightLeaf(false).setViewState({ type: name, active: true });
+		leaf = this.app.workspace.getLeavesOfType(name)[0];
+		return leaf.view;
 	}
 
 	private async openLeaf(name: string, center: boolean, split: boolean): Promise<void> {
