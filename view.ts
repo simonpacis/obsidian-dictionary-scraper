@@ -4,6 +4,24 @@ export const VIEW_TYPE = "perseus-view";
 
 export class DictionaryView extends ItemView {
 
+	async getAbbreviations(): Promise<string | null> {
+		try {
+
+			var res = await request('https://latinlexicon.org/LEM_abbreviations.php');
+			console.log(res);
+
+			var parser = new DOMParser();
+			var doc = parser.parseFromString(res, "text/html");
+			var entry = doc.querySelector('#main_container');
+			entry.innerHTML = "Fetched from: <a href='https://latinlexicon.org/LEM_abbreviations.php'>https://latinlexicon.org/LEM_abbreviations.php</a><br>&nbsp;<br>" + entry.innerHTML.replace(/<\/?a[^>]*>/g, ""); // Remove links
+			return entry;
+		}
+		catch (e) {
+			console.log(e);
+			return null;
+		}
+	}
+
 	async getEntry(query:string,dictionary:string): Promise<string | null> {
 		try {
 			var res = await fetch('https://www.perseus.tufts.edu/hopper/text\?doc\=Perseus%3Atext%3A'+dictionary+'%3Aentry%3D'+query);
@@ -38,6 +56,12 @@ export class DictionaryView extends ItemView {
 
 	}
 
+	clearResults(): void {
+			this.parent_div.empty();
+			this.perseus_results = this.parent_div.createEl("p", {cls: 'perseus-results', html: "" });
+			this.parent_div.createEl("hr", {cls: "end-hr"});
+	}
+
 	constructor(leaf: WorkspaceLeaf) {
 		super(leaf);
 		this.navigation = false; //openInCenter
@@ -62,6 +86,7 @@ export class DictionaryView extends ItemView {
 		this.contentEl.createEl("br", {});
 		this.perseus_submit = new ButtonComponent(this.contentEl).setButtonText("Look up");
 		this.perseus_clear = new ButtonComponent(this.contentEl).setButtonText("Clear results");
+		this.perseus_abbreviations = new ButtonComponent(this.contentEl).setButtonText("Explain abbreviations");
 		this.parent_div = this.contentEl.createEl("div");
 		this.perseus_results = this.parent_div.createEl("p", {cls: 'perseus-results', html: "" });
 		this.parent_div.createEl("hr", {cls: "end-hr"});
@@ -69,9 +94,13 @@ export class DictionaryView extends ItemView {
 			await this.getAndPopulateEntry(this.perseus_query.getValue());
 		});
 		this.perseus_clear.onClick(async () => {
-			this.parent_div.empty();
-			this.perseus_results = this.parent_div.createEl("p", {cls: 'perseus-results', html: "" });
-			this.parent_div.createEl("hr", {cls: "end-hr"});
+			this.clearResults();
+		});
+		this.perseus_abbreviations.onClick(async () => {
+			this.clearResults();
+			var entry = await this.getAbbreviations();
+			var reference_node = document.querySelector(".end-hr");
+			this.parent_div.insertAfter(entry, reference_node);
 		});
 
 	}

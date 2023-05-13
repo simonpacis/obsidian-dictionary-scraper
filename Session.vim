@@ -211,12 +211,11 @@ if &shortmess =~ 'A'
 else
   set shortmess=aoO
 endif
-badd +64 main.ts
-badd +2 manifest.json
-badd +51 view.ts
-badd +11 frame.ts
+badd +24 main.ts
+badd +1 manifest.json
+badd +36 view.ts
 badd +12 styles.css
-badd +0 README.md
+badd +14 README.md
 argglobal
 %argdel
 edit README.md
@@ -240,7 +239,7 @@ exe 'vert 1resize ' . ((&columns * 31 + 104) / 208)
 exe 'vert 2resize ' . ((&columns * 176 + 104) / 208)
 argglobal
 enew
-balt view.ts
+balt README.md
 let s:cpo_save=&cpo
 set cpo&vim
 nnoremap <buffer> <silent> <NL> :call nerdtree#ui_glue#invokeKeyMap("<C-j>")
@@ -564,11 +563,11 @@ setlocal wrap
 setlocal wrapmargin=0
 silent! normal! zE
 let &fdl = &fdl
-let s:l = 14 - ((13 * winheight(0) + 28) / 57)
+let s:l = 4 - ((3 * winheight(0) + 28) / 57)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
-keepjumps 14
+keepjumps 4
 normal! 0
 wincmd w
 2wincmd w

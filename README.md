@@ -1,5 +1,8 @@
 # Obsidian Perseus Dictionary
 
+NOTE: Primarily personal project.
+Use if you like.
+
 Choose between Elementary Lewis and Lewis and Short dictionaries from [Perseus](http://www.perseus.tufts.edu/hopper/).
 
 # Installation
