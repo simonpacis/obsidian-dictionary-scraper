@@ -202,7 +202,7 @@ let s:so_save = &g:so | let s:siso_save = &g:siso | setg so=0 siso=0 | setl so=-
 let v:this_session=expand("<sfile>:p")
 silent only
 silent tabonly
-cd ~/Documents/Development/Obsidian/obsidian-perseus-dictionary
+cd ~/Documents/Development/Obsidian/obsidian-dictionary-scraper
 if expand('%') == '' && !&modified && line('$') <= 1 && getline(1) == ''
   let s:wipebuf = bufnr('%')
 endif
@@ -211,11 +211,13 @@ if &shortmess =~ 'A'
 else
   set shortmess=aoO
 endif
-badd +37 main.ts
+badd +27 main.ts
+badd +36 view.ts
+badd +40 scraper.ts
+badd +8 perseuslem.ts
+badd +13 perseuslns.ts
+badd +63 latinlexicon.ts
 badd +4 manifest.json
-badd +148 view.ts
-badd +12 styles.css
-badd +8 README.md
 argglobal
 %argdel
 edit manifest.json
@@ -417,7 +419,7 @@ setlocal nowrap
 setlocal wrapmargin=0
 wincmd w
 argglobal
-balt view.ts
+balt latinlexicon.ts
 setlocal keymap=
 setlocal noarabic
 setlocal autoindent
@@ -551,12 +553,12 @@ setlocal wrap
 setlocal wrapmargin=0
 silent! normal! zE
 let &fdl = &fdl
-let s:l = 4 - ((3 * winheight(0) + 28) / 57)
+let s:l = 6 - ((5 * winheight(0) + 28) / 57)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
-keepjumps 4
-normal! 019|
+keepjumps 6
+normal! 053|
 wincmd w
 2wincmd w
 exe 'vert 1resize ' . ((&columns * 31 + 104) / 208)

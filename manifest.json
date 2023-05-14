@@ -1,11 +1,11 @@
 {
-	"id": "obsidian-perseus-dictionary",
-	"name": "Perseus Dictionary",
-	"version": "0.0.3",
+	"id": "obsidian-dictionary-scraper",
+	"name": "Dictionary Scraper",
+	"version": "0.0.4",
 	"minAppVersion": "0.15.0",
-	"description": "This is a sample plugin for Obsidian. This plugin demonstrates some of the capabilities of the Obsidian API.",
-	"author": "Obsidian",
-	"authorUrl": "https://obsidian.md",
-	"fundingUrl": "https://obsidian.md/pricing",
+	"description": "Scrape dictionaries across the web.",
+	"author": "Simon Pacis",
+	"authorUrl": "https://simonpacis.com",
+	"fundingUrl": "https://simonpacis.com",
 	"isDesktopOnly": false
 }

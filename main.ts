@@ -3,16 +3,16 @@ import { DictionaryView } from "./view";
 
 // Remember to rename these classes and interfaces!
 
-interface MyPluginSettings {
-	mySetting: string;
+interface ScraperSettings {
+	defaultOption: integer;
 }
 
-const DEFAULT_SETTINGS: MyPluginSettings = {
-	mySetting: 'default'
+const DEFAULT_SETTINGS: ScraperSettings = {
+	defaultOption: 0
 }
 
-export default class MyPlugin extends Plugin {
-	settings: MyPluginSettings;
+export default class DictionaryScraperPlugin extends Plugin {
+	settings: ScraperSettings;
 
 	async onload() {
 		await this.loadSettings();
@@ -20,13 +20,14 @@ export default class MyPlugin extends Plugin {
 		this.registerObsidianProtocolHandler("obsidian-perseus", async (e) => { //obsidian://obsidian-perseus
 			document.querySelector(".perseus-view").scrollTo(0,0);
 			var view = this.app.workspace.getLeavesOfType('perseus-view')[0].view;
-			view.getLatinLexiconEntry(e.id);
+			var scraper = view.scrapers[e.key].class;
+			scraper.protocolHandler(e.id);
 		});
 
 		this.registerView("perseus-view", l => new DictionaryView(l));
 		this.addCommand({
 			id: `open-${name}`,
-			name: `Enable Perseus Dictionary in sidebar`,
+			name: `Enable Dictionary Scraper in sidebar`,
 			callback: () => this.openLeaf("perseus-view", false, false),
 		});
 	}
