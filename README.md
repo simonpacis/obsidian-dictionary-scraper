@@ -28,7 +28,7 @@ A list of words matching the query will be returned. Click on the desired word t
 
 - Install BRAT from Community Plugins in Obsidian
 - Open Command Palette and run the command "BRAT: Add a beta plugin for testing"
-- Use the following link: https://github.com/simonpacis/obsidian-perseus-dictionary
+- Use the following link: https://github.com/simonpacis/obsidian-dictionary-scraper
 - Click "Add Plugin"
 - Go to Community Plugins, refresh, and enable Angry Reviewer
 
