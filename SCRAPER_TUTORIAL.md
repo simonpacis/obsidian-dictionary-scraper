@@ -61,7 +61,7 @@ try {
 
 <img width="1680" alt="Screen Shot 2023-05-15 at 8 14 28 AM" src="https://github.com/simonpacis/obsidian-dictionary-scraper/assets/7118482/2c3de610-873f-4302-9821-fa35728cac5a">
 
-2. The query is then pretty simple, and becomes ".artikel".
+2. The selector is then pretty simple, and becomes ".artikel".
 3. Below the call to super.getEntry we now call the method `parseElement` of the parent-class, passing in the HTML as parameter 1, the query-selector as parameter 2, and the query itself as parameter 3.
 
 ```typescript
