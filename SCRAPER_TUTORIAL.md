@@ -38,6 +38,8 @@ export class OrdnetScraper extends Scraper {
 }
 ```
 
+When the scraper is called, it is the `getAndPrintEntry`-method that will be called.
+
 ## Step 2: Get URL
 1. Go to ordnet.dk and search a query to get the URL we need for the scraper.
 
