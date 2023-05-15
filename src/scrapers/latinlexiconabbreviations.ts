@@ -19,7 +19,8 @@ export class LatinLexiconAbbreviationsScraper extends Scraper {
 		}
 	}
 
-	async getAndPrintAbbreviations(): void
+
+	async onClick(): void
 	{
 		var entry = await this.getAbbreviations();
 		super.printEntry(entry, true, false);

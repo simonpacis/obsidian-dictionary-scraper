@@ -20,7 +20,7 @@ If your plugin does not need CSS, delete this file.
 	margin-bottom:10px;
 }
 
-.perseus-view > button 
+.perseus-view button 
 {
 	width:100%;
 	margin-bottom:10px;

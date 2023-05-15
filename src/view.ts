@@ -8,42 +8,42 @@ import { OrdnetScraper } from "./scrapers/ordnet";
 export const VIEW_TYPE = "perseus-view";
 export const SCRAPERS =
 	{
-		"perseuslem":
-			{
-				'class': new PerseusLemScraper,
-				'type': 'option',
-				'name': 'Elementary Lewis (Perseus)',
-				'language': 'Latin'
-			},
-		"perseuslns":
-			{
-				'class': new PerseusLnsScraper,
-				'type': 'option',
-				'name': 'Lewis and Short (Perseus)',
-				'language': 'Latin'
-			},
-		"latinlexicon":
-			{
-				'class': new LatinLexiconScraper,
-				'type': 'option',
-				'name': 'latinlexicon.org',
-				'language': 'Latin'
-			},
-		"ordnet":
-			{
-				'class': new OrdnetScraper,
-				'type': 'option',
-				'name': 'ordnet.dk',
-				'language': 'Danish'
-			},
-		"latinlexiconabbreviations":
+	"perseuslem":
 		{
-			'class': new LatinLexiconAbbreviationsScraper,
-			'type': 'button',
-			'language': 'Latin',
-			'label': 'Explain abbreviations'
-		}
-	};
+		'class': new PerseusLemScraper,
+		'type': 'option',
+		'name': 'Elementary Lewis (Perseus)',
+		'language': 'Latin'
+	},
+	"perseuslns":
+		{
+		'class': new PerseusLnsScraper,
+		'type': 'option',
+		'name': 'Lewis and Short (Perseus)',
+		'language': 'Latin'
+	},
+	"latinlexicon":
+		{
+		'class': new LatinLexiconScraper,
+		'type': 'option',
+		'name': 'latinlexicon.org',
+		'language': 'Latin'
+	},
+	"ordnet":
+		{
+		'class': new OrdnetScraper,
+		'type': 'option',
+		'name': 'ordnet.dk',
+		'language': 'Danish'
+	},
+	"latinlexiconabbreviations":
+		{
+		'class': new LatinLexiconAbbreviationsScraper,
+		'type': 'button',
+		'language': 'Latin',
+		'label': 'Explain abbreviations'
+	}
+};
 
 export class DictionaryView extends ItemView {
 
@@ -85,6 +85,26 @@ export class DictionaryView extends ItemView {
 			if((scraper.hasOwnProperty('language')) && (this.prepareShortLanguage(scraper.language) == language))
 				{
 					scrapers[scraper_keys[i]] = scraper;
+				}
+		}
+		return scrapers;
+	}
+
+
+	getButtonScrapersWhereLanguageIs(language:string): Object<string, any> {
+		var scraper_keys = Object.keys(this.scrapers);
+		var scrapers = {}; 
+		for(var i = 0; i < scraper_keys.length; i++)
+		{
+			var scraper = this.scrapers[scraper_keys[i]];
+
+			if((scraper.hasOwnProperty('type')) && (scraper.type == "button"))
+				{
+
+					if((scraper.hasOwnProperty('language')) && (this.prepareShortLanguage(scraper.language) == language))
+						{
+							scrapers[scraper_keys[i]] = scraper;
+						}
 				}
 		}
 		return scrapers;
@@ -132,10 +152,27 @@ export class DictionaryView extends ItemView {
 			var scraper =  scrapers[scraper_keys[i]];
 			if(scraper.type == "option")
 				{
-			options[scraper_keys[i]] = scraper.name;
+					options[scraper_keys[i]] = scraper.name;
 				}
 		}
 		this.addOptions(options, this.perseus_select.selectEl);
+	}
+
+	populateCustomButtons(contentEl:HTMLElement): void {
+
+		var button_div = contentEl.querySelector(".dictionary-scraper-button-div");
+		button_div.innerHTML = "";
+
+		var button_scrapers = this.getButtonScrapersWhereLanguageIs(this.language_select.getValue());
+		var button_scraper_keys = Object.keys(button_scrapers);
+
+		for(var i = 0; i < button_scraper_keys.length; i++)
+		{
+			var button_scraper = button_scrapers[button_scraper_keys[i]];
+			var button = new ButtonComponent(button_div).setButtonText(button_scraper.label);
+			button.onClick(async() => { button_scraper.class.onClick() });
+		}
+
 	}
 
 
@@ -156,10 +193,22 @@ export class DictionaryView extends ItemView {
 		this.contentEl.createEl("br", {});
 		this.perseus_submit = new ButtonComponent(this.contentEl).setButtonText("Look up");
 		this.perseus_clear = new ButtonComponent(this.contentEl).setButtonText("Clear results");
-		this.perseus_abbreviations = new ButtonComponent(this.contentEl).setButtonText("Explain abbreviations");
+
+		this.button_div = this.contentEl.createEl("div", {cls:'dictionary-scraper-button-div'});
+
 		this.parent_div = this.contentEl.createEl("div", {cls:'dictionary-scraper-parent-div'});
 		this.perseus_results = this.parent_div.createEl("p", {cls: 'perseus-results', html: "" });
 		this.parent_div.createEl("hr", {cls: "end-hr"});
+
+		var button_div = document.createElement('div');
+		button_div.className = "dictionary-scraper-button-div";
+
+		var reference_node = document.querySelector(".end-hr");
+		var parent_div = window.document.querySelector(".dictionary-scraper-parent-div"); 
+
+
+		this.populateCustomButtons(this.contentEl);
+
 		this.perseus_submit.onClick(async () => {
 			var scraper = this.scrapers[this.perseus_select.getValue()];
 			await scraper.class.getAndPrintEntry(this.perseus_query.getValue());
@@ -167,12 +216,9 @@ export class DictionaryView extends ItemView {
 		this.perseus_clear.onClick(async () => {
 			this.clearResults();
 		});
-		this.perseus_abbreviations.onClick(async () => {
-			var scraper = this.scrapers['latinlexiconabbreviations'].class;
-			await scraper.getAndPrintAbbreviations();
-		});
 		this.language_select.onChange(async () => {
 			this.populateDictionaryOptions();
+			this.populateCustomButtons(this.contentEl);
 		});
 
 	}
