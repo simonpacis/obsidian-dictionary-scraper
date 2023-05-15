@@ -4,8 +4,9 @@ We will be developing a scraper for ordnet.dk, a dictionary for the Danish langu
 ## Step 0: Clone and prepare
 
 1. Clone the repository locally to your machine.
-2. Run `npm install`
-3. Go to `src` and run `npm run dev`
+2. Go to `src`.
+3. Run `npm install`
+4. Run `npm run dev`
 
 ## Step 1: Create file
 1. In `src/scrapers`, create a new file for your scraper. We will call it `ordnet.ts`.
