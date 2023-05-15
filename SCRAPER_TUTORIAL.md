@@ -117,4 +117,4 @@ export const SCRAPERS =
 <img width="1680" alt="Screen Shot 2023-05-15 at 8 22 32 AM" src="https://github.com/simonpacis/obsidian-dictionary-scraper/assets/7118482/e09d8930-be01-443f-8411-0f4c0677e40d">
 
 ## Step 6: Room for improvement
-The result includes some broken HTML-elements. A way to improve this simple scraper would be by cleaning up the HTML in `getEntry` before returning it.
+The result includes some broken HTML-elements. A way to improve this simple scraper would be by cleaning up the HTML in `getEntry` before returning it. Take a look at `latinlexicon.ts` to see how this might be accomplished.
