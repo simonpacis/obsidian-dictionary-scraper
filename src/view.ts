@@ -4,6 +4,7 @@ import { PerseusLnsScraper } from "./scrapers/perseuslns";
 import { LatinLexiconScraper } from "./scrapers/latinlexicon";
 import { LatinLexiconAbbreviationsScraper } from "./scrapers/latinlexiconabbreviations";
 import { OrdnetScraper } from "./scrapers/ordnet";
+import { OrdnetButton } from "./scrapers/ordnetbutton";
 
 export const VIEW_TYPE = "perseus-view";
 export const SCRAPERS =
@@ -42,6 +43,13 @@ export const SCRAPERS =
 		'type': 'button',
 		'scraper': ['perseuslns', 'perseuslem', 'latinlexicon'],
 		'label': 'Explain abbreviations'
+	},
+	"ordnetbutton":
+		{
+		'class': new OrdnetButton,
+		'type': 'button',
+		'scraper': 'ordnet',
+		'label': 'Åbn ordnet.dk'
 	}
 };
 
