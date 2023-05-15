@@ -97,17 +97,17 @@ import { OrdnetScraper } from "./scrapers/ordnet";
 
 ```typescript
 export const SCRAPERS =
+{
+...
+	"ordnet":
 	{
-  ...
-		"ordnet":
-			{
-				'class': new OrdnetScraper,
-				'type': 'option',
-				'name': 'ordnet.dk',
-				'language': 'Danish'
-			}
-   ...
-    };
+		'class': new OrdnetScraper,
+		'type': 'option',
+		'name': 'ordnet.dk',
+		'language': 'Danish'
+	}
+...
+};
 ```
 
 ## Step 5: Reload Obsidian and use your scraper
