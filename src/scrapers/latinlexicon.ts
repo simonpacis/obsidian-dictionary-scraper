@@ -24,7 +24,7 @@ export class LatinLexiconScraper extends Scraper {
 						}
 						entry.innerHTML += "<a href='obsidian://obsidian-perseus?key=latinlexicon&data="+option.id+"'>" + option.form + "</a>";
 				}
-				entry.innerHTML += "<br>&nbsp;<br>";
+				entry.innerHTML += "<br>";
 
 			}
 			return entry;
