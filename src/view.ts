@@ -40,7 +40,7 @@ export const SCRAPERS =
 		{
 		'class': new LatinLexiconAbbreviationsScraper,
 		'type': 'button',
-		'language': 'Latin',
+		'scraper': ['perseuslns', 'perseuslem', 'latinlexicon'],
 		'label': 'Explain abbreviations'
 	}
 };
@@ -110,6 +110,38 @@ export class DictionaryView extends ItemView {
 		return scrapers;
 	}
 
+
+	getButtonScrapersForScraper(selected_scraper:string): Object<string, any> {
+		var scraper_keys = Object.keys(this.scrapers);
+		var scrapers = {};
+		for(var i = 0; i < scraper_keys.length; i++)
+		{
+			var scraper = this.scrapers[scraper_keys[i]];
+			 
+
+			if((scraper.hasOwnProperty('type')) && (scraper.type == "button"))
+				{
+					if((scraper.hasOwnProperty('scraper')))
+						{
+							if(typeof scraper.scraper == "object") // Array
+							{
+								if(scraper.scraper.includes(selected_scraper))
+									{
+										scrapers[scraper_keys[i]] = scraper;
+									}
+							} else if(typeof scraper.scraper == "string")
+							{
+								if(scraper.scraper == selected_scraper)
+									{
+										scrapers[scraper_keys[i]] = scraper;
+									}
+							}
+						}
+				}
+		}
+		return scrapers;
+	}
+
 	prepareShortLanguage(language:string): string {
 
 		return language.replace(/[^0-9a-z]/gi, '').toLowerCase();
@@ -158,12 +190,12 @@ export class DictionaryView extends ItemView {
 		this.addOptions(options, this.perseus_select.selectEl);
 	}
 
-	populateCustomButtons(contentEl:HTMLElement): void {
+	populateCustomButtons(contentEl:HTMLElement, scraper:string): void {
 
 		var button_div = contentEl.querySelector(".dictionary-scraper-button-div");
 		button_div.innerHTML = "";
 
-		var button_scrapers = this.getButtonScrapersWhereLanguageIs(this.language_select.getValue());
+		var button_scrapers = this.getButtonScrapersForScraper(scraper);
 		var button_scraper_keys = Object.keys(button_scrapers);
 
 		for(var i = 0; i < button_scraper_keys.length; i++)
@@ -207,7 +239,7 @@ export class DictionaryView extends ItemView {
 		var parent_div = window.document.querySelector(".dictionary-scraper-parent-div"); 
 
 
-		this.populateCustomButtons(this.contentEl);
+		this.populateCustomButtons(this.contentEl, this.perseus_select.getValue());
 
 		this.perseus_submit.onClick(async () => {
 			var scraper = this.scrapers[this.perseus_select.getValue()];
@@ -218,7 +250,10 @@ export class DictionaryView extends ItemView {
 		});
 		this.language_select.onChange(async () => {
 			this.populateDictionaryOptions();
-			this.populateCustomButtons(this.contentEl);
+			this.populateCustomButtons(this.contentEl, this.perseus_select.getValue());
+		});
+		this.perseus_select.onChange(async () => {
+			this.populateCustomButtons(this.contentEl, this.perseus_select.getValue());
 		});
 
 	}
