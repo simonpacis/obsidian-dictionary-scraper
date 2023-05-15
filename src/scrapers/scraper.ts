@@ -3,7 +3,7 @@ import { ItemView, WorkspaceLeaf, Menu, ButtonComponent, TextComponent, Dropdown
 export class Scraper {
 
 	noResultsFound(query:string): HTMLElement {
-		entry = document.createElement('p');
+		var entry = document.createElement('p');
 		entry.innerHTML = 'No results found for "'+query+'".';
 		return entry;
 	}

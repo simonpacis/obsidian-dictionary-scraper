@@ -21,7 +21,7 @@ export default class DictionaryScraperPlugin extends Plugin {
 			document.querySelector(".perseus-view").scrollTo(0,0);
 			var view = this.app.workspace.getLeavesOfType('perseus-view')[0].view;
 			var scraper = view.scrapers[e.key].class;
-			scraper.protocolHandler(e.id);
+			scraper.protocolHandler(e.data);
 		});
 
 		this.registerView("perseus-view", l => new DictionaryView(l));

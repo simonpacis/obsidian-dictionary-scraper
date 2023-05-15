@@ -22,7 +22,7 @@ export class LatinLexiconScraper extends Scraper {
 						{
 							entry.innerHTML += "<br>";
 						}
-						entry.innerHTML += "<a href='obsidian://obsidian-perseus?key=latinlexicon&id="+option.id+"'>" + option.form + "</a>";
+						entry.innerHTML += "<a href='obsidian://obsidian-perseus?key=latinlexicon&data="+option.id+"'>" + option.form + "</a>";
 				}
 				entry.innerHTML += "<br>&nbsp;<br>";
 
@@ -46,7 +46,7 @@ export class LatinLexiconScraper extends Scraper {
 		var etymology_elem = doc.querySelector('.flash_card_etymology a');
 		if(etymology_elem != null)
 			{
-				var etymology_link = '<a style="font-variant: small-caps;" href="obsidian://obsidian-perseus?key=latinlexicon&id='+etymology_elem.getAttribute('orthography_id')+'">'+etymology_elem.innerText+'</a>';
+				var etymology_link = '<a style="font-variant: small-caps;" href="obsidian://obsidian-perseus?key=latinlexicon&data='+etymology_elem.getAttribute('orthography_id')+'">'+etymology_elem.innerText+'</a>';
 				entry.innerHTML += etymology_link + "<br>";
 			}
 
