@@ -8,7 +8,7 @@ This plugin takes a query and looks up said query in a given online dictionary. 
 
 # Current Scrapers
 
-| Scraper          | Website                         | Language | Process  |   
+| Dictionary       | Website                         | Language | Process  |   
 |------------------|---------------------------------|----------|----------|
 | Elementary Lewis | http://perseus.tufts.edu/hopper | Latin    | Lookup   |   
 | Lewis & Short    | http://perseus.tufts.edu/hopper | Latin    | Lookup   |   
