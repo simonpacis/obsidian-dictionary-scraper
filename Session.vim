@@ -213,8 +213,8 @@ else
 endif
 badd +26 src/view.ts
 badd +6 src/scrapers/scraper.ts
-badd +0 src/scrapers/ordnet.ts
-badd +0 manifest.json
+badd +12 src/scrapers/ordnet.ts
+badd +1 manifest.json
 argglobal
 %argdel
 edit manifest.json
@@ -238,11 +238,11 @@ set winheight=1
 set winminwidth=0
 set winwidth=1
 exe 'vert 1resize ' . ((&columns * 31 + 104) / 208)
-exe 'vert 2resize ' . ((&columns * 88 + 104) / 208)
-exe 'vert 3resize ' . ((&columns * 87 + 104) / 208)
+exe 'vert 2resize ' . ((&columns * 72 + 104) / 208)
+exe 'vert 3resize ' . ((&columns * 103 + 104) / 208)
 argglobal
 enew
-balt src/scrapers/scraper.ts
+balt src/view.ts
 let s:cpo_save=&cpo
 set cpo&vim
 nnoremap <buffer> <silent> <NL> :call nerdtree#ui_glue#invokeKeyMap("<C-j>")
@@ -562,8 +562,8 @@ keepjumps 4
 normal! 019|
 wincmd w
 argglobal
-if bufexists(fnamemodify("src/scrapers/ordnet.ts", ":p")) | buffer src/scrapers/ordnet.ts | else | edit src/scrapers/ordnet.ts | endif
-balt src/view.ts
+if bufexists(fnamemodify("src/view.ts", ":p")) | buffer src/view.ts | else | edit src/view.ts | endif
+balt src/scrapers/ordnet.ts
 setlocal keymap=
 setlocal noarabic
 setlocal autoindent
@@ -697,17 +697,17 @@ setlocal wrap
 setlocal wrapmargin=0
 silent! normal! zE
 let &fdl = &fdl
-let s:l = 4 - ((3 * winheight(0) + 28) / 57)
+let s:l = 149 - ((34 * winheight(0) + 28) / 57)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
-keepjumps 4
-normal! 027|
+keepjumps 149
+normal! 061|
 wincmd w
 2wincmd w
 exe 'vert 1resize ' . ((&columns * 31 + 104) / 208)
-exe 'vert 2resize ' . ((&columns * 88 + 104) / 208)
-exe 'vert 3resize ' . ((&columns * 87 + 104) / 208)
+exe 'vert 2resize ' . ((&columns * 72 + 104) / 208)
+exe 'vert 3resize ' . ((&columns * 103 + 104) / 208)
 tabnext 1
 if exists('s:wipebuf') && len(win_findbuf(s:wipebuf)) == 0
   silent exe 'bwipe ' . s:wipebuf
@@ -722,6 +722,7 @@ if filereadable(s:sx)
   exe "source " . fnameescape(s:sx)
 endif
 let &g:so = s:so_save | let &g:siso = s:siso_save
+nohlsearch
 doautoall SessionLoadPost
 unlet SessionLoad
 " vim: set ft=vim :

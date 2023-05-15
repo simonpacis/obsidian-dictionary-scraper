@@ -146,7 +146,7 @@ export class DictionaryView extends ItemView {
 		this.contentEl.setAttribute("style", style);
 		this.contentEl.empty();
 		this.contentEl.addClass("perseus-view");
-		this.contentEl.createEl("h6", { text: "Latin Dictionary Browser" });
+		this.contentEl.createEl("h6", { text: "Dictionary Scraper" });
 		this.language_select = new DropdownComponent(this.contentEl);
 		this.populateLanguageOptions();
 		this.perseus_select = new DropdownComponent(this.contentEl);

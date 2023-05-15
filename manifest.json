@@ -1,7 +1,7 @@
 {
 	"id": "obsidian-dictionary-scraper",
 	"name": "Dictionary Scraper",
-	"version": "0.0.5",
+	"version": "0.0.6",
 	"minAppVersion": "0.15.0",
 	"description": "Scrape dictionaries across the web.",
 	"author": "Simon Pacis",
