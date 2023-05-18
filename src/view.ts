@@ -125,25 +125,25 @@ export class DictionaryView extends ItemView {
 		for(var i = 0; i < scraper_keys.length; i++)
 		{
 			var scraper = this.scrapers[scraper_keys[i]];
-			 
+
 
 			if((scraper.hasOwnProperty('type')) && (scraper.type == "button"))
 				{
 					if((scraper.hasOwnProperty('scraper')))
 						{
 							if(typeof scraper.scraper == "object") // Array
-							{
-								if(scraper.scraper.includes(selected_scraper))
+								{
+									if(scraper.scraper.includes(selected_scraper))
+										{
+											scrapers[scraper_keys[i]] = scraper;
+										}
+								} else if(typeof scraper.scraper == "string")
 									{
-										scrapers[scraper_keys[i]] = scraper;
+										if(scraper.scraper == selected_scraper)
+											{
+												scrapers[scraper_keys[i]] = scraper;
+											}
 									}
-							} else if(typeof scraper.scraper == "string")
-							{
-								if(scraper.scraper == selected_scraper)
-									{
-										scrapers[scraper_keys[i]] = scraper;
-									}
-							}
 						}
 				}
 		}
@@ -256,35 +256,42 @@ export class DictionaryView extends ItemView {
 		this.perseus_clear.onClick(async () => {
 			this.clearResults();
 		});
-		this.language_select.onChange(async () => {
-			this.populateDictionaryOptions();
-			this.populateCustomButtons(this.contentEl, this.perseus_select.getValue());
+		this.perseus_query.inputEl.addEventListener("keydown", async (event) => {
+			if(event.code == "Enter")
+				{
+			var scraper = this.scrapers[this.perseus_select.getValue()];
+			await scraper.class.getAndPrintEntry(this.perseus_query.getValue());
+				}
 		});
-		this.perseus_select.onChange(async () => {
-			this.populateCustomButtons(this.contentEl, this.perseus_select.getValue());
-		});
+			this.language_select.onChange(async () => {
+				this.populateDictionaryOptions();
+				this.populateCustomButtons(this.contentEl, this.perseus_select.getValue());
+			});
+			this.perseus_select.onChange(async () => {
+				this.populateCustomButtons(this.contentEl, this.perseus_select.getValue());
+			});
+
+		}
+
+
+		getViewType() {
+			return VIEW_TYPE;
+		}
+
+		getDisplayText() {
+			return "Perseus Dictionary";
+		}
+
+		/*
+			 onPaneMenu(menu: Menu, source: string): void {
+			 super.onPaneMenu(menu, source);
+			 for (let action of CustomFrameView.actions) {
+			 menu.addItem(i => {
+			 i.setTitle(action.name);
+			 i.setIcon(action.icon);
+			 i.onClick(() => action.action(this));
+			 });
+			 }
+			 }*/
 
 	}
-
-
-	getViewType() {
-		return VIEW_TYPE;
-	}
-
-	getDisplayText() {
-		return "Perseus Dictionary";
-	}
-
-	/*
-		 onPaneMenu(menu: Menu, source: string): void {
-		 super.onPaneMenu(menu, source);
-		 for (let action of CustomFrameView.actions) {
-		 menu.addItem(i => {
-		 i.setTitle(action.name);
-		 i.setIcon(action.icon);
-		 i.onClick(() => action.action(this));
-		 });
-		 }
-		 }*/
-
-}
