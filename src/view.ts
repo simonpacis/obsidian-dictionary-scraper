@@ -5,6 +5,7 @@ import { LatinLexiconScraper } from "./scrapers/latinlexicon";
 import { LatinLexiconAbbreviationsScraper } from "./scrapers/latinlexiconabbreviations";
 import { OrdnetScraper } from "./scrapers/ordnet";
 import { OrdnetButton } from "./scrapers/ordnetbutton";
+import { EnacademicScraper } from "./scrapers/enacademic";
 
 export const VIEW_TYPE = "perseus-view";
 export const SCRAPERS =
@@ -29,6 +30,13 @@ export const SCRAPERS =
 		'type': 'option',
 		'name': 'latinlexicon.org',
 		'language': 'Latin'
+	},
+	"enacademic":
+		{
+		'class': new EnacademicScraper,
+		'type': 'option',
+		'name': 'en-academic.com',
+		'language': 'Greek'
 	},
 	"ordnet":
 		{
