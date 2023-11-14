@@ -15,6 +15,7 @@ This plugin takes a query and looks up said query in a given online dictionary. 
 | Lewis & Short    | http://perseus.tufts.edu/hopper | Latin    | Lookup   |   
 | latinlexicon.org | http://latinlexicon.org         | Latin    | Wordlist |   
 | ordnet.dk        | http://ordnet.dk                | Danish   | Lookup   |   
+| en-academic.com  | https://en-academic.com/        | Greek    | Wordlist |   
 
 ## Processes
 ### Lookup
